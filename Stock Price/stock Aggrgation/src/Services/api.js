@@ -11,11 +11,11 @@ const api = axios.create({
 
 // src/Services/api.js
 
-const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQ3NDY4MDk2LCJpYXQiOjE3NDc0Njc3OTYsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6IjJmNWZhZTM5LTcxYzctNDhhZC05ZmQyLTlmZjFiNTZiNzJhZiIsInN1YiI6Im1hbmlzaC5rdW1hcl9iZWNzZTIyQGF2aXQuYWMuaW4ifSwiZW1haWwiOiJtYW5pc2gua3VtYXJfYmVjc2UyMkBhdml0LmFjLmluIiwibmFtZSI6Im1hbmlzaCBrdW1hciIsInJvbGxObyI6IjM1MDIyMTA1NTciLCJhY2Nlc3NDb2RlIjoic2RKRENGIiwiY2xpZW50SUQiOiIyZjVmYWUzOS03MWM3LTQ4YWQtOWZkMi05ZmYxYjU2YjcyYWYiLCJjbGllbnRTZWNyZXQiOiJOeVVqVVlLTVBUeVVXZFhkIn0.ZZ1Krbvaok7M1wdT0yuYf6MIXCLFazV7R-YRbNOnEGE";
+const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQ3NDY5MjM1LCJpYXQiOjE3NDc0Njg5MzUsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6IjJmNWZhZTM5LTcxYzctNDhhZC05ZmQyLTlmZjFiNTZiNzJhZiIsInN1YiI6Im1hbmlzaC5rdW1hcl9iZWNzZTIyQGF2aXQuYWMuaW4ifSwiZW1haWwiOiJtYW5pc2gua3VtYXJfYmVjc2UyMkBhdml0LmFjLmluIiwibmFtZSI6Im1hbmlzaCBrdW1hciIsInJvbGxObyI6IjM1MDIyMTA1NTciLCJhY2Nlc3NDb2RlIjoic2RKRENGIiwiY2xpZW50SUQiOiIyZjVmYWUzOS03MWM3LTQ4YWQtOWZkMi05ZmYxYjU2YjcyYWYiLCJjbGllbnRTZWNyZXQiOiJOeVVqVVlLTVBUeVVXZFhkIn0.YOMKqA6BZ3omLkG6At_j4ZJZzP4NLFeeUMEC5UbCOJU";
 export async function getStockByTicker(ticker, minutes, aggregation = "average") {
     
   try {
-    const url ="http://20.244.56.144/evaluation-service/stocks"
+    const url =`http://20.244.56.144/evaluation-service/stocks/${ticker}?minutes=${minutes}&aggregation=${aggregation}`
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -25,7 +25,7 @@ export async function getStockByTicker(ticker, minutes, aggregation = "average")
 
     const data=await response.json()
     console.log(data)
-    
+    return data
   } catch (error) {
     console.error("Error fetching stock data:", error);
     return null;

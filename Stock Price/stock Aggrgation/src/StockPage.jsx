@@ -9,11 +9,16 @@ export default function StockPage() {
   const [minutes, setMinutes] = useState(10);
   const [stockData, setStockData] = useState([]);
 
- const fetchData = async () => {
+const fetchData = async () => {
   const data = await getStockByTicker(ticker, minutes);
-  console.log("Data in StockPage:", data);
-  if (data) setStockData(data);
+  if (data) {
+    console.log("Set data to chart:", data);
+    setStockData(data); // Assuming it's an array of stock points
+  } else {
+    console.error("No data received.");
+  }
 };
+
   useEffect(() => {
     fetchData();
   }, []);
